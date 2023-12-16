@@ -1,7 +1,7 @@
 name: Ansible deploy
 
 env:
-  "ANSIBLE_CONFIG" : /Crowd__Contract/ansible.cfg
+  "ANSIBLE_CONFIG" : "/Crowd__Contract/ansible.cfg"
 on:
   push:
     branches:
@@ -32,11 +32,11 @@ jobs:
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       env:
-            PRIVATE_KEY: ${{ secrets.AWS_SSH_KEY  }}
-            K8S_AUTH_KUBECONFIG: ${{secrets.KUBE_CONFIG_DATA}}
+            PRIVATE_KEY: "${{ secrets.AWS_SSH_KEY  }}"
+            K8S_AUTH_KUBECONFIG: "${{secrets.KUBE_CONFIG_DATA}}"
       with:
         playbook: deployToAws.yaml
-        directory: /Crowd__Contract/playbooks
+        directory: "/Crowd__Contract/playbooks"
         inventory: |
           [local] 
           ${{secrets.AWS_IP}} ansible_ssh_user=${{secrets.ANSIBLE_SSH_USERNAME}} ansible_ssh_pass=${{secrets.ANSIBLE_SSH_PASS}} ansible_sudo_pass=${{secrets.ANSIBLE_SUDO_PASS}} ansible_python_interpreter=/usr/bin/python3
